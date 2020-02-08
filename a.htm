@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Its You!</title>
+    <style>
+        @keyframes example {
+            from {transform: scale(0.1,0.1);}
+            to {transform: scale(1,1);}
+        }
+        #showme {
+            animation: example 4s ease-out;
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body style="margin: 0px;">
+    <video id='showme' autoplay style='width: 62%;margin-left: 15%;'></video>
+    <script>
+        var video = document.getElementById('showme');
+        if (navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+            video.srcObject = stream;
+            video.style.animationPlayState='running';
+            })
+            .catch(function (err0r) {
+            console.log("Something went wrong!");
+            });
+        }
+        function full(){
+            var video = document.getElementById('showme');
+            video.requestFullscreen();
+        };
+        video.addEventListener('click',full);
+    </script>
+</body>
+</html>
